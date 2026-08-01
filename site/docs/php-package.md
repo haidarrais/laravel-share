@@ -16,8 +16,15 @@ management.
 
 ## Installation
 
+> **Packagist note.** This monorepo publishes the umbrella
+> `artisan-share/monorepo` package on Packagist, but public Packagist does not
+> expose packages living in a monorepo subdirectory. `artisan-share/laravel` is
+> therefore not a standalone Packagist package — install it directly from this
+> GitHub repository as a VCS repository.
+
 ```bash
-composer require --dev artisan-share/laravel
+composer config repositories.artisan-share vcs https://github.com/haidarrais/laravel-share.git
+composer require --dev artisan-share/laravel:dev-main
 ```
 
 The package registers its service provider automatically. On first `php artisan
