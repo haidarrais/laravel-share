@@ -29,8 +29,8 @@ Press Ctrl+C to stop
   server), `cloudflare` (wraps your own `cloudflared`), and `ssh` (classic
   reverse tunnel). All terminate on infrastructure you own.
 - **Webhook-aware logging.** Pretty-printed bodies, provider detection from
-  signing headers, and compact one-line summaries with `--verbose` for full
-  headers.
+  signing headers, and compact one-line summaries with `--show-headers` for
+  full headers.
 - **Local web inspector.** A localhost-only dashboard (`127.0.0.1:4040`) that
   mirrors the terminal log and supports request replay.
 - **Secure by default.** TLS end-to-end, per-session tokens, client-side header
@@ -78,7 +78,7 @@ php artisan share --port=9000                  # forward a different local port
 php artisan share --subdomain=my-app           # request a subdomain (relay)
 php artisan share --basic-auth="user:pass"     # protect the public endpoint
 php artisan share --inspector-port=0           # disable the web inspector
-php artisan share --verbose                    # show full request headers
+php artisan share --show-headers              # show full request headers
 ```
 
 Press `Ctrl+C` to shut down cleanly. The tunnel session is torn down so the
@@ -93,7 +93,7 @@ public URL is immediately invalidated.
 | `--subdomain` | Requested subdomain on the relay driver. |
 | `--basic-auth` | `user:pass` HTTP basic auth for the public endpoint. |
 | `--inspector-port` | Port for the local web inspector (`0` disables). |
-| `--verbose` | Print full request headers in the terminal log. |
+| `--show-headers` | Print full request headers in the terminal log. |
 | `--binary` | Path to an already-installed tunnel client binary. |
 
 ## Drivers
@@ -178,7 +178,7 @@ payloads):
 
 Sensitive request headers (`authorization`, `cookie`, `stripe-signature`, …)
 and secret-shaped body patterns are masked in the terminal log and inspector by
-default. Use `--verbose` to reveal headers.
+default. Use `--show-headers` to reveal headers.
 
 ## Security
 

@@ -16,7 +16,7 @@ class ShareCommand extends Command
         {--subdomain= : Requested subdomain (relay driver)}
         {--basic-auth= : "user:pass" HTTP basic auth for the public endpoint}
         {--inspector-port= : Port for the localhost web inspector (0 disables)}
-        {--verbose : Show full request headers in the log}
+        {--show-headers : Show full request headers in the log}
         {--binary= : Path to an already-installed tunnel client binary}';
 
     protected $description = 'Share a local endpoint with a public URL via a tunnel driver you own';
@@ -84,7 +84,7 @@ class ShareCommand extends Command
             'subdomain' => $this->option('subdomain'),
             'basic_auth' => $this->option('basic-auth'),
             'inspector-port' => $this->option('inspector-port'),
-            'verbose' => (bool) $this->option('verbose'),
+            'verbose' => (bool) $this->option('show-headers'),
         ]);
     }
 }

@@ -40,7 +40,7 @@ Press Ctrl+C to stop
   `cloudflare` (wraps your own `cloudflared`), and `ssh` (classic reverse tunnel). All
   terminate on infrastructure you own.
 - **Webhook-aware logging.** Pretty-printed bodies, provider detection from signing
-  headers, and compact one-line summaries with `--verbose` for full headers.
+  headers, and compact one-line summaries with `--show-headers` for full headers.
 - **Local web inspector.** A localhost-only dashboard (`127.0.0.1:4040`) that mirrors the
   terminal log and supports request replay.
 - **Secure by default.** TLS end-to-end, per-session tokens, client-side header

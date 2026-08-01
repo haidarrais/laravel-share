@@ -40,7 +40,7 @@ php artisan share --port=9000                  # forward a different local port
 php artisan share --subdomain=my-app           # request a subdomain (relay)
 php artisan share --basic-auth="user:pass"     # protect the public endpoint
 php artisan share --inspector-port=0           # disable the web inspector
-php artisan share --verbose                    # show full request headers
+php artisan share --show-headers              # show full request headers
 ```
 
 Press `Ctrl+C` to shut down cleanly. The tunnel session is torn down so the
@@ -55,7 +55,7 @@ public URL is immediately invalidated.
 | `--subdomain` | Requested subdomain on the relay driver. |
 | `--basic-auth` | `user:pass` HTTP basic auth for the public endpoint. |
 | `--inspector-port` | Port for the local web inspector (`0` disables). |
-| `--verbose` | Print full request headers in the terminal log. |
+| `--show-headers` | Print full request headers in the terminal log. |
 | `--binary` | Path to an already-installed tunnel client binary. |
 
 ## Local web inspector
