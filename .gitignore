@@ -9,6 +9,9 @@ composer.lock
 # Artisan Share cache
 .artisan-share/
 
+# Jekyll site build
+/site/_site/
+
 # OS / editor
 .DS_Store
 *.swp

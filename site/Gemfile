@@ -1,0 +1,6 @@
+# Local preview only. GitHub Pages builds the site itself via
+# .github/workflows/pages.yml and does not use this file.
+source "https://rubygems.org"
+
+gem "jekyll", "~> 4.3"
+gem "minima", "~> 2.5"

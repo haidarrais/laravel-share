@@ -1,0 +1,16 @@
+# Artisan Share documentation site
+# Built by GitHub Pages (Jekyll) via .github/workflows/pages.yml
+title: Artisan Share
+description: Zero-config webhook tunnels for Laravel. Share a local endpoint with a public URL via a driver you own.
+baseurl: /laravel-share
+url: ""
+
+markdown: kramdown
+theme: minima
+show_excerpts: true
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
