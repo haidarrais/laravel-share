@@ -4,13 +4,22 @@ layout: default
 permalink: /
 ---
 
-Zero-config webhook tunnels for Laravel. Share a local endpoint with a public
-URL via a **driver you own** — a self-hosted relay, your own Cloudflare
-account, or any SSH host you already have.
-
-> **This project is software only.** It operates no shared relay, no backend,
-> and no "artisan-share.com" service. Every public endpoint is deployed and
-> owned by the person using it. There is nothing to sign up for.
+<section class="hero">
+  <h1>Zero-config webhook tunnels for Laravel</h1>
+  <p class="lead">
+    Share a local endpoint with a public HTTPS URL via a <strong>driver you own</strong> —
+    a self-hosted relay, your own Cloudflare account, or any SSH host you already have.
+  </p>
+  <p class="hero-note">
+    <strong>This project is software only.</strong> It operates no shared relay, no backend,
+    and no "artisan-share.com" service. Every public endpoint is deployed and owned by the
+    person using it. There is nothing to sign up for.
+  </p>
+  <div class="hero-actions">
+    <a class="btn primary" href="{{ '/docs/php-package' | relative_url }}">Get started</a>
+    <a class="btn" href="{{ '/docs/drivers' | relative_url }}">Browse the docs</a>
+  </div>
+</section>
 
 ```
 $ php artisan share
@@ -25,22 +34,19 @@ Press Ctrl+C to stop
 
 ## Features
 
-- **One command, zero config.** `php artisan share` reads your app's port,
-  starts the tunnel, and prints a public HTTPS URL.
-- **Bring-your-own drivers.** `relay` (self-host the project's reference
-  server), `cloudflare` (wraps your own `cloudflared`), and `ssh` (classic
-  reverse tunnel). All terminate on infrastructure you own.
-- **Webhook-aware logging.** Pretty-printed bodies, provider detection from
-  signing headers, and compact one-line summaries with `--verbose` for full
-  headers.
-- **Local web inspector.** A localhost-only dashboard (`127.0.0.1:4040`) that
-  mirrors the terminal log and supports request replay.
+- **One command, zero config.** `php artisan share` reads your app's port, starts the
+  tunnel, and prints a public HTTPS URL.
+- **Bring-your-own drivers.** `relay` (self-host the project's reference server),
+  `cloudflare` (wraps your own `cloudflared`), and `ssh` (classic reverse tunnel). All
+  terminate on infrastructure you own.
+- **Webhook-aware logging.** Pretty-printed bodies, provider detection from signing
+  headers, and compact one-line summaries with `--verbose` for full headers.
+- **Local web inspector.** A localhost-only dashboard (`127.0.0.1:4040`) that mirrors the
+  terminal log and supports request replay.
 - **Secure by default.** TLS end-to-end, per-session tokens, client-side header
   redaction, and no payload persistence on any shipped driver.
 
-## Contents
-
-This monorepo ships three artifacts:
+## What's in this monorepo
 
 | Artifact | Path | Description |
 |---|---|---|
@@ -48,24 +54,31 @@ This monorepo ships three artifacts:
 | Tunnel client | `crates/tunnel-client` | A single static Rust binary spawned by the command. |
 | Relay server | `crates/relay-server` | A reference self-hosted backend for the `relay` driver. |
 
-## Getting started
-
-```bash
-composer require --dev artisan-share/laravel
-php artisan share
-```
-
-See the [PHP package guide](/docs/php-package) for installation, config, and
-the full flag reference.
-
 ## Explore the docs
 
-- [Drivers](/docs/drivers) — `relay`, `cloudflare`, and `ssh`.
-- [Deploy](/docs/deploy) — deploy the reference relay server (Fly, Railway,
-  Docker Compose).
-- [Relay protocol](/docs/protocol) — the wire protocol v1 spec.
-- [Rust](/docs/rust) — the tunnel client and relay server crates.
-- [Contributing](/docs/contributing) — build, test, and report security issues.
-
-The full source of this page is the repository
-[README]({{ site.github.repository_url }}/blob/main/README.md).
+<div class="cards">
+  <div class="card">
+    <h3><a href="{{ '/docs/php-package' | relative_url }}">PHP package</a></h3>
+    <p>Install, config, flags, and the local web inspector.</p>
+  </div>
+  <div class="card">
+    <h3><a href="{{ '/docs/drivers' | relative_url }}">Drivers</a></h3>
+    <p><code>relay</code>, <code>cloudflare</code>, and <code>ssh</code>.</p>
+  </div>
+  <div class="card">
+    <h3><a href="{{ '/docs/deploy' | relative_url }}">Deploy</a></h3>
+    <p>Run the reference relay server on Fly, Railway, or Docker.</p>
+  </div>
+  <div class="card">
+    <h3><a href="{{ '/docs/protocol' | relative_url }}">Relay protocol</a></h3>
+    <p>The wire protocol v1 spec between client and server.</p>
+  </div>
+  <div class="card">
+    <h3><a href="{{ '/docs/rust' | relative_url }}">Rust crates</a></h3>
+    <p>Build, test, and cross-compile the tunnel client and server.</p>
+  </div>
+  <div class="card">
+    <h3><a href="{{ '/docs/contributing' | relative_url }}">Contributing</a></h3>
+    <p>Development workflow, testing, and security reporting.</p>
+  </div>
+</div>

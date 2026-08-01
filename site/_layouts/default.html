@@ -3,26 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <title>{% if page.title and page.url != '/' %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ site.description }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238b5cf6'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>A</text></svg>">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-  <header>
-    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-    <nav>
-      <ul>
-        {% for item in site.data.nav %}
-        <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </nav>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <span class="brand-logo">A</span>
+        <span>{{ site.title }}</span>
+      </a>
+      <nav class="topnav" aria-label="Main">
+        <ul>
+          {% for item in site.data.nav %}
+          <li><a href="{{ item.url | relative_url }}"{% if page.url == item.url %} class="active"{% endif %}>{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
   </header>
-  <main>
-    {{ content }}
-  </main>
-  <footer>
-    <p>{{ site.title }} — {{ site.description }}</p>
+
+  {% if page.url == '/' %}
+  <div class="wrap">
+    <main>{{ content }}</main>
+  </div>
+  {% else %}
+  <div class="wrap">
+    <div class="layout">
+      <aside class="sidenav" aria-label="Docs">
+        <p class="sidenav-label">Docs</p>
+        <ul>
+          {% for item in site.data.nav %}
+          <li><a href="{{ item.url | relative_url }}"{% if page.url == item.url %} class="active"{% endif %}>{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </aside>
+      <main>{{ content }}</main>
+    </div>
+  </div>
+  {% endif %}
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>{{ site.title }} — {{ site.description }}</span>
+      <span><a href="https://github.com/haidarrais/laravel-share">GitHub</a> · MIT License</span>
+    </div>
   </footer>
 </body>
 </html>

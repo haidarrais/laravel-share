@@ -6,8 +6,6 @@ baseurl: /laravel-share
 url: ""
 
 markdown: kramdown
-theme: minima
-show_excerpts: true
 
 defaults:
   - scope:
