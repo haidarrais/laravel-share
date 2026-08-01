@@ -1,0 +1,17 @@
+# Rust
+/target
+Cargo.lock
+
+# Composer / PHP
+packages/artisan-share/vendor/
+composer.lock
+.phpunit.cache/
+
+# Artisan Share cache
+.artisan-share/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/

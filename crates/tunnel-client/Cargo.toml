@@ -1,0 +1,34 @@
+[package]
+name = "tunnel-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Artisan Share tunnel client — the local Rust binary spawned by `php artisan share`"
+
+[[bin]]
+name = "tunnel-client"
+path = "src/main.rs"
+
+[dependencies]
+tokio.workspace = true
+tokio-tungstenite.workspace = true
+futures-util.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+clap.workspace = true
+uuid.workspace = true
+base64 = "0.22"
+syntect = "5"
+sha2 = "0.10"
+url = "2"
+regex = "1"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "stream"] }
+chrono.workspace = true
+axum.workspace = true
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
