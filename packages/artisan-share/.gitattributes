@@ -1,0 +1,6 @@
+# Preserve line endings
+* text=auto
+
+# Exclude development-only files from Packagist dist tarballs
+tests/ export-ignore
+phpunit.xml.dist export-ignore

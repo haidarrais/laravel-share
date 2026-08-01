@@ -1,0 +1,27 @@
+{
+    "name": "artisan-share/monorepo",
+    "description": "Artisan Share monorepo — Laravel artisan webhook tunnel (PHP package) plus Rust relay-server and tunnel-client.",
+    "type": "library",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*"
+        }
+    ],
+    "require-dev": {
+        "artisan-share/laravel": "@dev"
+    },
+    "extra": {
+        "projects": {
+            "packages/*": {
+                "composer.json": true
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
