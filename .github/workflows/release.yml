@@ -44,11 +44,16 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           key: release-${{ matrix.target }}
-      - name: Install cargo-zigbuild and zig
+      - name: Install cargo-zigbuild
         if: matrix.cross
         uses: taiki-e/install-action@v2
         with:
-          tool: cargo-zigbuild,zig
+          tool: cargo-zigbuild
+      - name: Install zig
+        if: matrix.cross
+        uses: ziglang/action-setup-zig@v3
+        with:
+          version: 0.14.1
       - name: Build tunnel-client
         run: cargo ${{ matrix.cross && 'zigbuild' || 'build' }} --release --target ${{ matrix.target }} --bin tunnel-client
       - name: Build relay-server
