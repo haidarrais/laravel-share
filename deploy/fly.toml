@@ -1,0 +1,28 @@
+# Deploy your own relay instance on Fly.io's free tier:
+#
+#   flyctl launch --config deploy/fly.toml --dockerfile deploy/docker/relay-server.Dockerfile
+#   flyctl secrets set SHARE_RELAY_HOST=tunnel.your-app.fly.dev SHARE_RELAY_TOKEN=change-me
+#   flyctl deploy --config deploy/fly.toml
+#
+# Put a TLS-terminating reverse proxy / your app's custom domain in front of it.
+
+app = "artisan-share-relay"
+primary_region = "iad"
+
+[build]
+  dockerfile = "deploy/docker/relay-server.Dockerfile"
+
+[env]
+  SHARE_RELAY_HOST = "localhost"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1

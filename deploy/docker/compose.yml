@@ -1,0 +1,21 @@
+# One-command deployment of your own relay instance on a home server or VPS.
+#
+#   docker compose -f deploy/docker/compose.yml up -d
+#
+# The relay binds 0.0.0.0:8080. Put a TLS-terminating reverse proxy (Caddy,
+# Nginx) in front of it and point SHARE_RELAY_HOST at your public hostname.
+services:
+  relay:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/relay-server.Dockerfile
+    image: ghcr.io/artisan-share/relay-server:latest
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    environment:
+      # Public hostname reachable at the TLS proxy, e.g. tunnel.example.dev.
+      - SHARE_RELAY_HOST=${SHARE_RELAY_HOST:-localhost}
+      # Optional: require a per-session token from clients.
+      - SHARE_RELAY_TOKEN=${SHARE_RELAY_TOKEN:-}
+    # The relay keeps only ephemeral in-memory state; no volumes are needed.

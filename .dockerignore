@@ -1,0 +1,4 @@
+.git
+target
+packages/artisan-share/vendor
+**/.DS_Store

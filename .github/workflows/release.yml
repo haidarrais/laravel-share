@@ -1,0 +1,107 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build-binaries:
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+            ext: ''
+          - target: aarch64-unknown-linux-gnu
+            os: ubuntu-latest
+            ext: ''
+          - target: x86_64-apple-darwin
+            os: macos-latest
+            ext: ''
+          - target: aarch64-apple-darwin
+            os: macos-latest
+            ext: ''
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            ext: '.exe'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: release-${{ matrix.target }}
+      - name: Build tunnel-client
+        run: cargo build --release --target ${{ matrix.target }} --bin tunnel-client
+      - name: Build relay-server
+        run: cargo build --release --target ${{ matrix.target }} --bin relay-server
+      - name: Compute checksums (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          cd target/${{ matrix.target }}/release
+          shasum -a 256 tunnel-client${{ matrix.ext }} > tunnel-client${{ matrix.ext }}.sha256
+          shasum -a 256 relay-server${{ matrix.ext }} > relay-server${{ matrix.ext }}.sha256
+      - name: Compute checksums (Windows)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          cd target/${{ matrix.target }}/release
+          sha256sum tunnel-client${{ matrix.ext }} > tunnel-client${{ matrix.ext }}.sha256
+          sha256sum relay-server${{ matrix.ext }} > relay-server${{ matrix.ext }}.sha256
+      - name: Upload assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target }}
+          path: |
+            target/${{ matrix.target }}/release/tunnel-client${{ matrix.ext }}
+            target/${{ matrix.target }}/release/tunnel-client${{ matrix.ext }}.sha256
+            target/${{ matrix.target }}/release/relay-server${{ matrix.ext }}
+            target/${{ matrix.target }}/release/relay-server${{ matrix.ext }}.sha256
+
+  publish:
+    name: Publish release assets + Docker image
+    needs: build-binaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Determine tag
+        id: tag
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: ${{ steps.tag.outputs.tag }}
+          draft: false
+          prerelease: false
+          files: artifacts/*
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push relay-server image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/docker/relay-server.Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/relay-server:${{ steps.tag.outputs.tag }}
+            ghcr.io/${{ github.repository_owner }}/relay-server:latest
