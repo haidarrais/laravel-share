@@ -10,8 +10,8 @@ management.
 
 ## Requirements
 
-- PHP **8.2+** and Composer
-- Laravel **10, 11, or 12**
+- PHP **8.2+** (PHP **8.3+** for Laravel 13) and Composer
+- Laravel **10, 11, 12, or 13**
 - A tunnel driver you already control (see [Drivers](/docs/drivers))
 
 ## Installation

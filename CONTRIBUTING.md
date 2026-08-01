@@ -23,7 +23,7 @@ By participating you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md)
 ## Development environment
 
 - **Rust:** stable toolchain. Verify with `rustc --version`.
-- **PHP:** 8.2+ with Composer.
+- **PHP:** 8.2+ (8.3+ for Laravel 13) with Composer.
 - **Docker** (optional) to build/test the relay image.
 
 ## The three artifacts
