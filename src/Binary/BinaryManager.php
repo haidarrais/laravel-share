@@ -111,7 +111,7 @@ final class BinaryManager
     private function downloadUrl(): string
     {
         $repo = $this->config['repo'] ?? 'haidarrais/laravel-share';
-        $tag = $this->config['tag'] ?? 'v0.1.3';
+        $tag = $this->config['tag'] ?? 'v0.1.4';
 
         return sprintf(
             'https://github.com/%s/releases/download/%s/%s',
