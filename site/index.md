@@ -50,7 +50,7 @@ Press Ctrl+C to stop
 
 | Artifact | Path | Description |
 |---|---|---|
-| Laravel package | `packages/artisan-share` | The `php artisan share` command and config. |
+| Laravel package | root `composer.json` | The `php artisan share` command and config. |
 | Tunnel client | `crates/tunnel-client` | A single static Rust binary spawned by the command. |
 | Relay server | `crates/relay-server` | A reference self-hosted backend for the `relay` driver. |
 

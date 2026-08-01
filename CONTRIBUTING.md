@@ -30,7 +30,7 @@ By participating you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md)
 
 | Artifact | Path | Language | Checks |
 |---|---|---|---|
-| Laravel package | `packages/artisan-share` | PHP | PHPUnit, Pint |
+| Laravel package | repo root (root `composer.json`) | PHP | PHPUnit, Pint |
 | Tunnel client | `crates/tunnel-client` | Rust | cargo test, clippy, fmt |
 | Relay server | `crates/relay-server` | Rust | cargo test, clippy, fmt |
 
@@ -50,7 +50,6 @@ cargo test --workspace
 ### PHP
 
 ```bash
-cd packages/artisan-share
 composer install
 vendor/bin/pint --test
 vendor/bin/phpunit

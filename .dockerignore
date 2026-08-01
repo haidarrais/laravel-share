@@ -1,4 +1,4 @@
 .git
 target
-packages/artisan-share/vendor
+/vendor
 **/.DS_Store

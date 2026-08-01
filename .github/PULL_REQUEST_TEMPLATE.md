@@ -3,7 +3,7 @@
 Briefly describe the change and why. Link the issue it resolves (e.g. `Closes #123`).
 
 ## Scope
-- [ ] Laravel package (`packages/artisan-share`)
+- [ ] Laravel package (`src/`, root `composer.json`)
 - [ ] Tunnel client (`crates/tunnel-client`)
 - [ ] Relay server (`crates/relay-server`)
 - [ ] Deploy templates (`deploy/`)

@@ -4,8 +4,8 @@ layout: default
 permalink: /docs/php-package
 ---
 
-The Laravel package at `packages/artisan-share` provides the `php artisan
-share` command, its config, and the platform-appropriate tunnel-client binary
+The Laravel package at the repository root provides the `php artisan share`
+command, its config, and the platform-appropriate tunnel-client binary
 management.
 
 ## Requirements
@@ -16,15 +16,8 @@ management.
 
 ## Installation
 
-> **Packagist note.** This monorepo publishes the umbrella
-> `artisan-share/monorepo` package on Packagist, but public Packagist does not
-> expose packages living in a monorepo subdirectory. `artisan-share/laravel` is
-> therefore not a standalone Packagist package — install it directly from this
-> GitHub repository as a VCS repository.
-
 ```bash
-composer config repositories.artisan-share vcs https://github.com/haidarrais/laravel-share.git
-composer require --dev artisan-share/laravel:dev-main
+composer require --dev artisan-share/laravel
 ```
 
 The package registers its service provider automatically. On first `php artisan

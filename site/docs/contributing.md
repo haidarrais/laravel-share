@@ -29,7 +29,6 @@ cargo fmt --all
 ### PHP
 
 ```bash
-cd packages/artisan-share
 composer install
 vendor/bin/phpunit
 vendor/bin/pint --test

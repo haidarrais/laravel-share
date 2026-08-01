@@ -2,7 +2,7 @@
 /target
 
 # Composer / PHP
-packages/artisan-share/vendor/
+/vendor/
 composer.lock
 .phpunit.cache/
 

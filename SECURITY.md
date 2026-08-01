@@ -29,7 +29,7 @@ In scope:
 
 - The `tunnel-client` binary (forwarding, redaction, inspector, driver logic).
 - The `relay-server` reference implementation.
-- The Laravel package (`packages/artisan-share`).
+- The Laravel package (the repository root `composer.json`).
 
 Out of scope (the project operates none of these; they are owned by the user):
 

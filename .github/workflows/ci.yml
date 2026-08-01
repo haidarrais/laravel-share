@@ -44,9 +44,6 @@ jobs:
       matrix:
         php: ['8.2', '8.3', '8.4']
         os: [ubuntu-latest]
-    defaults:
-      run:
-        working-directory: packages/artisan-share
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -55,8 +52,6 @@ jobs:
           coverage: none
           tools: composer:v2
       - uses: ramsey/composer-install@v3
-        with:
-          working-directory: packages/artisan-share
       - name: Laravel Pint
         run: vendor/bin/pint --test
       - name: PHPUnit

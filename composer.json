@@ -1,23 +1,40 @@
 {
-    "name": "artisan-share/monorepo",
-    "description": "Artisan Share monorepo — Laravel artisan webhook tunnel (PHP package) plus Rust relay-server and tunnel-client.",
-    "type": "library",
+    "name": "artisan-share/laravel",
+    "description": "Zero-config webhook tunnel for Laravel — share local endpoints with a public URL via a driver you own (relay, cloudflare, ssh).",
+    "keywords": ["laravel", "webhook", "tunnel", "ngrok", "artisan"],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "packages/*"
-        }
-    ],
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "illuminate/console": "^10.0|^11.0|^12.0",
+        "illuminate/contracts": "^10.0|^11.0|^12.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
     "require-dev": {
-        "artisan-share/laravel": "@dev"
+        "laravel/pint": "^1.30",
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit": "^10.5|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ArtisanShare\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArtisanShare\\Tests\\": "tests/"
+        }
     },
     "extra": {
-        "projects": {
-            "packages/*": {
-                "composer.json": true
-            }
+        "laravel": {
+            "providers": [
+                "ArtisanShare\\ArtisanShareServiceProvider"
+            ]
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "config": {
         "sort-packages": true

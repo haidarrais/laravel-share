@@ -42,7 +42,7 @@ This monorepo ships three artifacts:
 
 | Artifact | Path | Description |
 |---|---|---|
-| Laravel package | `packages/artisan-share` | The `php artisan share` command and config. |
+| Laravel package | root `composer.json` | The `php artisan share` command and config. |
 | Tunnel client | `crates/tunnel-client` | A single static Rust binary spawned by the command. |
 | Relay server | `crates/relay-server` | A reference self-hosted backend for the `relay` driver. |
 
@@ -54,15 +54,8 @@ This monorepo ships three artifacts:
 
 ## Installation
 
-> **Note on Packagist.** This monorepo publishes the umbrella
-> `artisan-share/monorepo` package on Packagist, but public Packagist does not
-> expose packages living in a monorepo subdirectory. So `artisan-share/laravel`
-> is not a standalone Packagist package — install it straight from this GitHub
-> repository as a VCS repository.
-
 ```bash
-composer config repositories.artisan-share vcs https://github.com/haidarrais/laravel-share.git
-composer require --dev artisan-share/laravel:dev-main
+composer require --dev artisan-share/laravel
 ```
 
 The package registers its service provider automatically. On first `php artisan
@@ -208,7 +201,6 @@ cargo fmt --all
 ### PHP
 
 ```bash
-cd packages/artisan-share
 composer install
 vendor/bin/phpunit
 vendor/bin/pint --test
