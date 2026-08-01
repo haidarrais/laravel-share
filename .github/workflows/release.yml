@@ -18,22 +18,27 @@ jobs:
         include:
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
+            prefix: linux-x86_64
             ext: ''
             cross: false
           - target: aarch64-unknown-linux-gnu
             os: ubuntu-latest
+            prefix: linux-aarch64
             ext: ''
             cross: true
           - target: x86_64-apple-darwin
             os: macos-latest
+            prefix: darwin-x86_64
             ext: ''
             cross: false
           - target: aarch64-apple-darwin
             os: macos-latest
+            prefix: darwin-aarch64
             ext: ''
             cross: false
           - target: x86_64-pc-windows-msvc
             os: windows-latest
+            prefix: windows-x86_64
             ext: '.exe'
             cross: false
     steps:
@@ -71,15 +76,22 @@ jobs:
           cd target/${{ matrix.target }}/release
           sha256sum tunnel-client${{ matrix.ext }} > tunnel-client${{ matrix.ext }}.sha256
           sha256sum relay-server${{ matrix.ext }} > relay-server${{ matrix.ext }}.sha256
+      - name: Rename assets to platform names
+        run: |
+          cd target/${{ matrix.target }}/release
+          mv tunnel-client${{ matrix.ext }} tunnel-client-${{ matrix.prefix }}${{ matrix.ext }}
+          mv tunnel-client${{ matrix.ext }}.sha256 tunnel-client-${{ matrix.prefix }}${{ matrix.ext }}.sha256
+          mv relay-server${{ matrix.ext }} relay-server-${{ matrix.prefix }}${{ matrix.ext }}
+          mv relay-server${{ matrix.ext }}.sha256 relay-server-${{ matrix.prefix }}${{ matrix.ext }}.sha256
       - name: Upload assets
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.target }}
           path: |
-            target/${{ matrix.target }}/release/tunnel-client${{ matrix.ext }}
-            target/${{ matrix.target }}/release/tunnel-client${{ matrix.ext }}.sha256
-            target/${{ matrix.target }}/release/relay-server${{ matrix.ext }}
-            target/${{ matrix.target }}/release/relay-server${{ matrix.ext }}.sha256
+            target/${{ matrix.target }}/release/tunnel-client-${{ matrix.prefix }}${{ matrix.ext }}
+            target/${{ matrix.target }}/release/tunnel-client-${{ matrix.prefix }}${{ matrix.ext }}.sha256
+            target/${{ matrix.target }}/release/relay-server-${{ matrix.prefix }}${{ matrix.ext }}
+            target/${{ matrix.target }}/release/relay-server-${{ matrix.prefix }}${{ matrix.ext }}.sha256
 
   publish:
     name: Publish release assets + Docker image

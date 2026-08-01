@@ -103,7 +103,8 @@ return [
         // GitHub repository providing the release assets.
         'repo' => env('SHARE_BINARY_REPO', 'haidarrais/laravel-share'),
 
-        // Release tag/asset prefix. When null, defaults to the package version.
+        // Release tag to fetch assets from. When null, defaults to the latest
+        // published release tag (see BinaryManager).
         'tag' => env('SHARE_BINARY_TAG', null),
     ],
 ];

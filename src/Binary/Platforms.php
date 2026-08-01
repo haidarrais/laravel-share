@@ -17,9 +17,19 @@ final class Platforms
      */
     public static function assetName(): string
     {
-        $os = self::os();
-        $arch = self::arch();
+        return self::assetNameFor(self::os(), self::arch());
+    }
 
+    /**
+     * Return the release asset filename for a given OS and architecture pair.
+     *
+     * This is the contract with the release workflow, which uploads assets under
+     * these names so the binary manager can fetch the right one per platform.
+     *
+     * @throws \RuntimeException for unsupported combinations
+     */
+    public static function assetNameFor(string $os, string $arch): string
+    {
         return match ($os.'-'.$arch) {
             'linux-x64' => 'tunnel-client-linux-x86_64',
             'linux-arm64' => 'tunnel-client-linux-aarch64',
